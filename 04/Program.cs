@@ -1,4 +1,6 @@
-﻿using System.IO.Pipelines;
+﻿using System.Data;
+using System.Globalization;
+using System.IO.Pipelines;
 using System.Text.RegularExpressions;
 
 string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
@@ -8,25 +10,31 @@ var blocs = file.Split("\r\n\r\n");
 var nums = blocs[0].Split(",").ToList().Select(p => int.Parse(p)).ToList();
 List<Array> cards = [];
 Regex re = new Regex(@"\d+");
-int i = 1;
-while (i < blocs.Count())
+
+
+void fillCards()
 {
-  MatchCollection d = re.Matches(blocs[i]);
-  int r = 0;
-  int c = 0;
-  int[,] card = new int[6, 6];
-  d.ToList().ForEach(cell =>
+  cards.Clear();
+  int i = 1;
+  while (i < blocs.Count())
   {
-    card[r, c] = int.Parse(cell.Value);
-    c++;
-    if (c > 4)
+    MatchCollection d = re.Matches(blocs[i]);
+    int r = 0;
+    int c = 0;
+    int[,] card = new int[6, 6];
+    d.ToList().ForEach(cell =>
     {
-      r++;
-      c = 0;
-    }
-  });
-  cards.Add(card);
-  i++;
+      card[r, c] = int.Parse(cell.Value);
+      c++;
+      if (c > 4)
+      {
+        r++;
+        c = 0;
+      }
+    });
+    cards.Add(card);
+    i++;
+  }
 }
 
 bool checkNum(int board, int num)
@@ -41,7 +49,7 @@ bool checkNum(int board, int num)
     {
       if (card[r, c] == num)
       {
-        Console.WriteLine($"board {board} num {num}");
+        // Console.WriteLine($"board {board} num {num}");
         card[r, c] = -1;
         card[r, 5] += 1;
         card[5, c] += 1;
@@ -54,10 +62,30 @@ bool checkNum(int board, int num)
   return result;
 }
 
+int totalBoard(int board)
+{
+  int result = 0;
+  int[,] card = (int[,])cards[board];
+  int r = 0;
+  while (r < 5)
+  {
+    int c = 0;
+    while (c < 5)
+    {
+      if (card[r, c] != -1) result += card[r, c];
+      c++;
+    }
+    r++;
+  }
+  return result;
+}
+
 void part1()
 {
+  fillCards();
   int ans = 0;
   int i = 0;
+  int card = 0;
   bool win = false;
   while (i < nums.Count && !win)
   {
@@ -66,19 +94,42 @@ void part1()
     {
       win = checkNum(c, nums[i]);
       ans = nums[i];
+      card = c;
       c++;
     }
     i++;
   }
-  Console.WriteLine($"Part 1 - Answer : {ans}");
+
+  Console.WriteLine($"Part 1 - Answer : {ans * totalBoard(card)} card : {card}");
 }
 
 
 void part2()
 {
+  fillCards();
   int ans = 0;
+  int i = 0;
+  int card = 0;
+  bool win = false;
+  HashSet<int> wins = [];
+  while (i < nums.Count && wins.Count < cards.Count)
+  {
+    int c = 0;
+    while (c < cards.Count && wins.Count < cards.Count)
+    {
+      win = checkNum(c, nums[i]);
+      if (win)
+      {
+        ans = nums[i];
+        card = c;
+        wins.Add(card);
+      }
+      c++;
+    }
+    i++;
 
-  Console.WriteLine($"Part 2 - Answer : {ans}");
+  }
+  Console.WriteLine($"Part 2 - Answer : {ans * totalBoard(card)}");
 }
 
 part1();
