@@ -1,0 +1,15 @@
+C:\Users\yvesg\git\aoc2021\09\bin\Debug\net9.0\09.exe
+C:\Users\yvesg\git\aoc2021\09\bin\Debug\net9.0\09.deps.json
+C:\Users\yvesg\git\aoc2021\09\bin\Debug\net9.0\09.runtimeconfig.json
+C:\Users\yvesg\git\aoc2021\09\bin\Debug\net9.0\09.dll
+C:\Users\yvesg\git\aoc2021\09\bin\Debug\net9.0\09.pdb
+C:\Users\yvesg\git\aoc2021\09\obj\Debug\net9.0\09.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\yvesg\git\aoc2021\09\obj\Debug\net9.0\09.AssemblyInfoInputs.cache
+C:\Users\yvesg\git\aoc2021\09\obj\Debug\net9.0\09.AssemblyInfo.cs
+C:\Users\yvesg\git\aoc2021\09\obj\Debug\net9.0\09.csproj.CoreCompileInputs.cache
+C:\Users\yvesg\git\aoc2021\09\obj\Debug\net9.0\09.sourcelink.json
+C:\Users\yvesg\git\aoc2021\09\obj\Debug\net9.0\09.dll
+C:\Users\yvesg\git\aoc2021\09\obj\Debug\net9.0\refint\09.dll
+C:\Users\yvesg\git\aoc2021\09\obj\Debug\net9.0\09.pdb
+C:\Users\yvesg\git\aoc2021\09\obj\Debug\net9.0\09.genruntimeconfig.cache
+C:\Users\yvesg\git\aoc2021\09\obj\Debug\net9.0\ref\09.dll
