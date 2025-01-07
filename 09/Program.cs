@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 List<string> file = args.Length > 0 ? File.ReadAllLines(args[0]).ToList() : File.ReadAllLines($"{home}\\git\\aoc2021\\09\\data.txt").ToList();
@@ -43,18 +44,18 @@ void part1()
 
 void flood(int x, int y)
 {
-  if (!seen.Contains((x, y)))
+  int reference = int.Parse(file[y].Substring(x, 1));
+  if (!seen.Contains((x, y)) && reference != 9)
   {
     seen.Add((x, y));
     bassin.Add((x, y));
-    int reference = int.Parse(file[y].Substring(x, 1));
     directions.ForEach(d =>
         {
           var (dx, dy) = d;
           if (x + dx >= 0 && x + dx < w && y + dy >= 0 && y + dy < h)
           {
             int target = int.Parse(file[y + dy].Substring(x + dx, 1));
-            if (target != 9 && target == reference + 1)
+            if (target != 9)
             {
               flood(x + dx, y + dy);
             }
@@ -67,17 +68,30 @@ void part2()
 {
   long ans = 1;
   List<int> sizes = [];
-  lows.ToList().ForEach(l => {
-    bassin.Clear();
-    flood(l.Item1,l.Item2);
-    sizes.Add(bassin.Count);
-  });
+  // lows.ToList().ForEach(l =>
+  // {
+  //   bassin.Clear();
+  //   flood(l.Item1, l.Item2);
+  //   sizes.Add(bassin.Count);
+  // });
+  int r = 0;
+  while (r < h) {
+    int c = 0;
+    while (c < w) {
+      bassin.Clear();
+      flood(c,r);
+      sizes.Add(bassin.Count);
+      c++;
+    }
+    r++;
+  }
   sizes.Sort();
-  sizes.TakeLast(3).ToList().ForEach(i=> {
+  sizes.TakeLast(3).ToList().ForEach(i =>
+  {
     ans *= i;
   });
-  
-  
+
+
   Console.WriteLine($"Part 2 - Answer : {ans}");
 }
 
