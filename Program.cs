@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 
 string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-var file = args.Length > 0 ? File.ReadAllText(args[0]) : File.ReadAllText($"{home}\\git\\aoc2020\\04\\test.txt");
+List<string> file = args.Length > 0 ? File.ReadAllLines(args[0]).ToList() : File.ReadAllLines($"{home}\\git\\aoc2021\\10\\test.txt").ToList();
 
 void part1()
 {
@@ -9,18 +9,6 @@ void part1()
   Console.WriteLine($"Part 1 - Answer : {ans}");
 }
 
-void print(string str, bool valid)
-{
-  if (valid)
-  {
-    Console.ForegroundColor = ConsoleColor.Green;
-  }
-  else
-  {
-    Console.ForegroundColor = ConsoleColor.Red;
-  }
-  Console.Write($"{str} ");
-}
 
 void part2()
 {
