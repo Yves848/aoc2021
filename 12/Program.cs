@@ -1,66 +1,60 @@
 ﻿using System.Runtime.ExceptionServices;
+using System.Runtime.InteropServices.Marshalling;
 using System.Security.AccessControl;
 using System.Text.RegularExpressions;
 
 string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 List<string> file = args.Length > 0 ? File.ReadAllLines(args[0]).ToList() : File.ReadAllLines($"{home}\\git\\aoc2021\\12\\test.txt").ToList();
-List<(string,string)> dir = [];
+List<(string, string)> dir = [];
 
-void fillDir() {
+void fillDir()
+{
   dir.Clear();
-  file.ToList().ForEach(f => {
+  file.ToList().ForEach(f =>
+  {
     var p = f.Split("-");
-    dir.Add((p[0],p[1]));
+    dir.Add((p[0], p[1]));
+    dir.Add((p[1], p[0]));
   });
 }
-
-void part1()
+int solve(bool p1)
 {
   int ans = 0;
   List<string> chemins = [];
   fillDir();
-  Stack<string> Q = [];
-  dir.ForEach(d => {
-    var (a1,a2) = d;
-    if (a1 == "start") {
-      Q.Push(a2);
-    } 
-    if (a2 == "start") {
-      Q.Push(a1);
+  Stack<(string, List<string>, string)> Q = [];
+  Q.Push(("start", ["start"], ""));
+
+  while (Q.Count > 0)
+  {
+    var (pos, small, twice) = Q.Pop();
+    if (pos == "end")
+    {
+      ans += 1;
+      continue;
     }
-    List<string> chemin = ["start"];
-    HashSet<string> seen = [];
-    List<(string,string)> dir2 = [..dir];
-    while(Q.Count > 0) {
-      string ch = Q.Pop();
-      if (ch == "end") {
-        chemin.Add(ch);
-        chemins.Add(string.Join(',',chemin));
-        Console.WriteLine(string.Join(',',chemin));
+    dir.Where(w => w.Item1 == pos).ToList().ForEach(y =>
+    {
+      if (!small.Contains(y.Item2))
+      {
+        List<string> new_small = [.. small];
+        if (y.Item2 == y.Item2.ToLower()) new_small.Add(y.Item2);
+        Q.Push((y.Item2, new_small, twice));
       }
-      if (ch == ch.ToLower()) {
-        if (seen.Contains(ch)) continue;
+      else
+      {
+        if (small.Contains(y.Item2) && twice == "" && !(new[] { "start", "end" }).Contains(y.Item2) && !p1) Q.Push((y.Item2, small, y.Item2));
       }
-      int i = 0;
-      while(i < dir2.Count) {
-        var (b1,b2) = dir2[i];
-        if (b1 != "start" && b2 != "start") {
-          if (b1 == ch) {
-            Q.Push(b2);
-            chemin.Add(b2);
-            dir2.RemoveAt(i);
-            break;
-          }
-          if (b2 == ch) {
-            Q.Push(b1);
-            chemin.Add(b1);
-            dir2.RemoveAt(i);
-          }
-          i++;
-        } else dir2.RemoveAt(i);
-      }
-    }
-  });
+
+    });
+  }
+  return ans;
+}
+
+void part1()
+{
+  int ans = solve(true);
+
   Console.WriteLine($"Part 1 - Answer : {ans}");
 }
 
@@ -68,7 +62,7 @@ void part1()
 void part2()
 {
   int ans = 0;
-
+  ans = solve(false);
   Console.WriteLine($"Part 2 - Answer : {ans}");
 }
 
