@@ -80,7 +80,7 @@ int flash()
       grid[y, x] = 0;
       dirs.ForEach(d =>
       {
-        // printGrid();
+        printGrid();
         var (dy, dx) = d;
         if (x + dx >= 0 && x + dx < w && y + dy >= 0 && y + dy < h && !seen.Contains((y + dy, x + dx)))
         {
