@@ -1,7 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
 string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-List<string> file = args.Length > 0 ? File.ReadAllLines(args[0]).ToList() : File.ReadAllLines($"{home}\\git\\aoc2021\\16\\test.txt").ToList();
+
+List<string> file = args.Length > 0 ? File.ReadAllLines(args[0]).ToList() : File.ReadAllLines($"{home}/git/aoc2021/16/test.txt").ToList();
 
 int process4(string packet, int pos) {
   int r = pos;
@@ -12,7 +13,10 @@ int process4(string packet, int pos) {
     bits += packet.Substring(pos+1,4);
     pos += 5;
   }
-  return Convert.ToInt32(bits,2);
+  r = pos / 4;
+  if (r*4 < pos) r++;
+  // Console.WriteLine(r);
+  return r*4;
 }
 
 void part1()
@@ -28,10 +32,9 @@ void part1()
   while (true) {
     int version = Convert.ToInt32(bits.Substring(pointer,3),2);
     int id = Convert.ToInt32(bits.Substring(pointer+3,3),2);
-    int l = 0;
     switch (id) {
       case 4: {
-        l = process4(bits,pointer+6);
+        pointer  = process4(bits,pointer+6);
         break;
       }
     }
