@@ -8,23 +8,23 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\yvesg\\.nuget\\packages\\": {},
+    "C:\\Users\\Yves\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yvesg\\git\\aoc2021\\16\\16.csproj",
+      "projectUniqueName": "C:\\Users\\Yves\\git\\aoc2021\\16\\16.csproj",
       "projectName": "16",
-      "projectPath": "C:\\Users\\yvesg\\git\\aoc2021\\16\\16.csproj",
-      "packagesPath": "C:\\Users\\yvesg\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yvesg\\git\\aoc2021\\16\\obj\\",
+      "projectPath": "C:\\Users\\Yves\\git\\aoc2021\\16\\16.csproj",
+      "packagesPath": "C:\\Users\\Yves\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Yves\\git\\aoc2021\\16\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\yvesg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Yves\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -49,7 +49,7 @@
       "restoreAuditProperties": {
         "enableAudit": "true",
         "auditLevel": "low",
-        "auditMode": "all"
+        "auditMode": "direct"
       },
       "SdkAnalysisLevel": "9.0.100"
     },
@@ -72,7 +72,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
